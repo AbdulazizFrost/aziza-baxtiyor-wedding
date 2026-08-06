@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubaydullo & Sitora - Nikoh To'yi</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Premium Typography: Cormorant Garamond for Serif, Great Vibes for Cursive -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&display=swap" rel="stylesheet">
+    <!-- GSAP for Animation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+
+<!-- WATERMARK -->
+<div id="watermark"></div>
+
+<div class="container">
+    
+    <!-- AUDIO -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+    
+    <!-- SCENE 1 -->
+    <div class="scene" id="scene1">
+        <div class="bg-wrapper bg-top">
+            <img class="bg-img" src="assets/images/bg_1.jpg" alt="Background">
+            <div class="bg-gradient-overlay fade-bottom"></div>
+        </div>
+        
+        <img class="ornament bottom-left" src="assets/images/ornament.png" alt="Ornament">
+        <img class="ornament bottom-right" src="assets/images/ornament.png" alt="Ornament">
+        
+        <div class="content content-s1">
+            <div class="divider"></div>
+            <p class="serif-text quote-text">"Va sizlarni juft qilib yaratdik"<br>78:8</p>
+            <div class="divider"></div>
+            
+            <div class="names-container">
+                <h1 class="cursive-text main-name">Aziza</h1>
+                <span class="cursive-text ampersand">&</span>
+                <h1 class="cursive-text main-name">Baxtiyor</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCENE 2 -->
+    <div class="scene" id="scene2">
+        <div class="bg-wrapper bg-bottom">
+            <img class="bg-img" src="assets/images/bg_2.jpg" alt="Background">
+            <div class="bg-gradient-overlay fade-top"></div>
+        </div>
+
+        <img class="ornament top-left" src="assets/images/ornament.png" alt="Ornament">
+        <img class="ornament top-right" src="assets/images/ornament.png" alt="Ornament">
+
+        <div class="content content-top">
+            <h2 class="cursive-text title-text">Assalomu alaykum</h2>
+            <div class="divider"></div>
+            
+            <p class="serif-text main-body mt-4">
+                Hurmatli aziz mehmonimiz<br>
+                Sizni hayotimizning eng go'zal va<br>
+                baxtli onlarida<br>
+                biz bilan bo'lishingiz istagida<br>
+                Nikoh shodiyonamizga<br>
+                taklif qilamiz
+            </p>
+        </div>
+    </div>
+
+    <!-- SCENE 3 -->
+    <div class="scene" id="scene3">
+        <div class="bg-wrapper bg-top">
+            <img class="bg-img" src="assets/images/bg_3.jpg" alt="Background">
+            <div class="bg-gradient-overlay fade-bottom"></div>
+        </div>
+
+        <img class="ornament bottom-left" src="assets/images/ornament.png" alt="Ornament">
+        <img class="ornament bottom-right" src="assets/images/ornament.png" alt="Ornament">
+
+        <div class="content content-center-bottom">
+            <h2 class="cursive-text title-text mb-4">Sevimli kun</h2>
+            
+            <div class="calendar">
+                <div class="cal-header">Su</div><div class="cal-header">Mo</div><div class="cal-header">Tu</div>
+                <div class="cal-header">We</div><div class="cal-header">Th</div><div class="cal-header">Fr</div><div class="cal-header">Sa</div>
+                
+                <div></div><div></div><div></div><div>1</div><div>2</div><div>3</div><div>4</div>
+                <div>5</div><div>6</div><div>7</div><div>8</div><div>9</div>
+                
+                <div class="cal-highlight">
+                    10
+                    <!-- SVG Hand-drawn Heart -->
+                    <svg class="heart-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50,85 C50,85 15,55 15,30 C15,15 35,15 50,35 C65,15 85,15 85,30 C85,55 50,85 50,85 Z" fill="none" stroke="#4a4238" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                
+                <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div>17</div><div>18</div>
+                <div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div><div>25</div>
+                <div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div><div></div>
+            </div>
+            <div class="divider mt-4"></div>
+        </div>
+    </div>
+
+    <!-- SCENE 4 -->
+    <div class="scene" id="scene4">
+        <div class="bg-wrapper bg-top">
+            <img class="bg-img" src="assets/images/bg_4.jpg" alt="Background">
+            <div class="bg-gradient-overlay fade-bottom"></div>
+        </div>
+
+        <img class="ornament bottom-left" src="assets/images/ornament.png" alt="Ornament">
+        <img class="ornament bottom-right" src="assets/images/ornament.png" alt="Ornament">
+
+        <div class="content content-center-bottom">
+            <p class="serif-text date-large">10 &nbsp;|&nbsp; 08 &nbsp;|&nbsp; 2026</p>
+            <p class="serif-text time-text">Soat: 18:00</p>
+            
+            <div class="divider"></div>
+            
+            <h2 class="cursive-text subtitle-text mt-2">Manzil:</h2>
+            <p class="serif-text location-text">
+                "xasan xusan"<br>
+                to'yxonasi
+            </p>
+        </div>
+    </div>
+
+    <!-- SCENE 5 -->
+    <div class="scene" id="scene5">
+        <div class="bg-wrapper bg-bottom">
+            <!-- Reusing bg_2.jpg based on visual similarity of hands/rings -->
+            <img class="bg-img" src="assets/images/bg_2.jpg" alt="Background">
+            <div class="bg-gradient-overlay fade-top"></div>
+        </div>
+
+        <img class="ornament top-left" src="assets/images/ornament.png" alt="Ornament">
+        <img class="ornament top-right" src="assets/images/ornament.png" alt="Ornament">
+
+        <div class="content content-top">
+            <div class="divider"></div>
+            
+            <p class="serif-text main-body italic mt-4">
+                Qalblar ezgulikka to'la<br>
+                ushbu kunda do'stlar<br>
+                yonida bo'ling
+            </p>
+            
+            <div class="divider mt-4"></div>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
