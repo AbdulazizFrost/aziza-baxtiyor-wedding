@@ -21,13 +21,13 @@ window.addEventListener("load", () => {
         const sceneTl = gsap.timeline();
 
         // 1. Fade in the scene container
-        sceneTl.to(scene, { autoAlpha: 1, duration: 1, ease: "power2.inOut" });
+        sceneTl.to(scene, { autoAlpha: 1, duration: 0.8, ease: "power2.inOut" });
 
         // 2. Cinematic slow zoom on background image
         if (bg) {
             sceneTl.fromTo(bg, 
                 { scale: 1.05, filter: "blur(2px)" }, 
-                { scale: 1, filter: "blur(0px)", duration: 4, ease: "power1.out" }, 
+                { scale: 1, filter: "blur(0px)", duration: 2.5, ease: "power1.out" }, 
                 "<"
             );
         }
@@ -37,9 +37,9 @@ window.addEventListener("load", () => {
         // 3. Elegant staggered fade-up for ornaments
         if (ornaments.length > 0) {
             sceneTl.fromTo(ornaments, 
-                { autoAlpha: 0, y: (i, el) => el.classList.contains('top-left') || el.classList.contains('top-right') ? -20 : 20 }, 
-                { autoAlpha: 0.85, y: 0, duration: 1.5, stagger: 0.2, ease: "power2.out" }, 
-                "-=3.5"
+                { autoAlpha: 0, y: (i, el) => el.classList.contains('top-left') || el.classList.contains('top-right') ? -15 : 15 }, 
+                { autoAlpha: 0.85, y: 0, duration: 1.0, stagger: 0.1, ease: "power2.out" }, 
+                "-=2.0"
             );
         }
 
@@ -47,34 +47,34 @@ window.addEventListener("load", () => {
         if (textElements.length > 0) {
             sceneTl.fromTo(textElements, 
                 { autoAlpha: 0, y: 15 }, 
-                { autoAlpha: 1, y: 0, duration: 1.5, stagger: 0.3, ease: "power2.out" }, 
-                "-=3"
+                { autoAlpha: 1, y: 0, duration: 1.0, stagger: 0.15, ease: "power2.out" }, 
+                "-=2.0"
             );
         }
         
         // Custom micro-animation for Scene 3 (Heart Drawing)
         if (heart && heartPath) {
-            sceneTl.to(heart, { autoAlpha: 1, duration: 0.5 }, "-=1.5");
+            sceneTl.to(heart, { autoAlpha: 1, duration: 0.4 }, "-=1.0");
             const pathLength = heartPath.getTotalLength();
             gsap.set(heartPath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
-            sceneTl.to(heartPath, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut" }, "-=1.5");
+            sceneTl.to(heartPath, { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, "-=1.0");
         }
 
         // 5. Fade in footer links last
         if (footer) {
             sceneTl.fromTo(footer, 
                 { autoAlpha: 0 }, 
-                { autoAlpha: 1, duration: 1.5, ease: "power2.out" }, 
-                "-=1.5"
+                { autoAlpha: 1, duration: 1.0, ease: "power2.out" }, 
+                "-=1.0"
             );
         }
 
         // 6. Hold the scene for reading time
-        sceneTl.to({}, { duration: 4 }); 
+        sceneTl.to({}, { duration: 1.8 }); 
 
         // 7. Fade out the entire scene (UNLESS it is the very last scene)
         if (index < scenes.length - 1) {
-            sceneTl.to(scene, { autoAlpha: 0, duration: 1.2, ease: "power2.inOut" });
+            sceneTl.to(scene, { autoAlpha: 0, duration: 0.8, ease: "power2.inOut" });
         }
 
         // Add to master timeline
