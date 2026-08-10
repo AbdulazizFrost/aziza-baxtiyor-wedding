@@ -395,6 +395,7 @@ body {
 }
 
 #open-invitation-btn {
+    display: inline-block;
     background: transparent;
     border: 1px solid rgba(74, 66, 56, 0.4);
     color: var(--text-color);
@@ -408,6 +409,7 @@ body {
     outline: none;
     transition: all 0.3s ease;
     -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 #open-invitation-btn:hover, #open-invitation-btn:focus-visible {
