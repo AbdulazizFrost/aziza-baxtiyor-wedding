@@ -273,11 +273,11 @@ body {
 
 .heart-icon {
     position: absolute;
-    width: 46px;
-    height: 46px;
+    width: 50px;
+    height: 50px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -55%) rotate(-8deg);
+    transform: translate(-50%, -50%);
     opacity: 0; /* Animated in via GSAP */
 }
 
