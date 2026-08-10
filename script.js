@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
         const textElements = scene.querySelectorAll(".content > *:not(.ornament):not(.footer-links)");
         const footer = scene.querySelector(".footer-links");
         const heart = scene.querySelector(".heart-icon");
-        const heartPaths = scene.querySelectorAll(".heart-icon path");
+        const heartPath = scene.querySelector(".heart-icon path");
 
         const sceneTl = gsap.timeline();
 
@@ -32,18 +32,7 @@ window.addEventListener("load", () => {
             );
         }
 
-        // --- SYNCHRONIZATION CHECKPOINT FOR SCENE 1 ---
-        // If this is the first scene, we pause the master timeline here if audio is blocked.
-        // This ensures the site looks alive (ambient zoom/fade happened) but does not advance to Scene 2.
-        if (index === 0) {
-            sceneTl.add(() => {
-                if (!isAudioPlaying) {
-                    masterTl.pause();
-                    audioBlockedAndWaiting = true;
-                    gsap.to("#tap-prompt", { autoAlpha: 1, duration: 1, ease: "power2.out" });
-                }
-            }, 3.5); // Pause at 3.5s if no audio
-        }
+        // Synchronization checkpoint removed. Animation will play continuously.
 
         // 3. Elegant staggered fade-up for ornaments
         if (ornaments.length > 0) {
@@ -64,13 +53,11 @@ window.addEventListener("load", () => {
         }
         
         // Custom micro-animation for Scene 3 (Heart Drawing)
-        if (heart && heartPaths.length > 0) {
+        if (heart && heartPath) {
             sceneTl.to(heart, { autoAlpha: 1, duration: 0.5 }, "-=1.5");
-            heartPaths.forEach(hp => {
-                const pathLength = hp.getTotalLength();
-                gsap.set(hp, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
-                sceneTl.to(hp, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut" }, "-=1.5");
-            });
+            const pathLength = heartPath.getTotalLength();
+            gsap.set(heartPath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+            sceneTl.to(heartPath, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut" }, "-=1.5");
         }
 
         // 5. Fade in footer links last
@@ -109,9 +96,6 @@ window.addEventListener("load", () => {
                     document.removeEventListener(evt, handleInteraction)
                 );
                 
-                // Hide the tap prompt if it was shown
-                gsap.to("#tap-prompt", { autoAlpha: 0, duration: 0.5 });
-                
                 // If the timeline was paused waiting for interaction, resume it!
                 if (audioBlockedAndWaiting) {
                     audioBlockedAndWaiting = false;
@@ -132,11 +116,8 @@ window.addEventListener("load", () => {
             document.removeEventListener(evt, handleInteraction)
         );
         
-        // 2. Synchronize audio perfectly to the GSAP timeline current time
-        // This prevents the music from feeling "late" if they tap after initial ambient animations
-        if (masterTl.time() > 0 && bgMusic.duration > 0) {
-            bgMusic.currentTime = masterTl.time() % bgMusic.duration;
-        }
+        // 2. We no longer fast-forward the audio. It will strictly start from 0:00.
+        bgMusic.currentTime = 0;
         
         // 3. Start audio (and implicitly resume the timeline via the promise resolution)
         startExperience();
