@@ -40,6 +40,7 @@ window.addEventListener("load", () => {
                 if (!isAudioPlaying) {
                     masterTl.pause();
                     audioBlockedAndWaiting = true;
+                    gsap.to("#tap-prompt", { autoAlpha: 1, duration: 1, ease: "power2.out" });
                 }
             }, 3.5); // Pause at 3.5s if no audio
         }
@@ -107,6 +108,9 @@ window.addEventListener("load", () => {
                 ['click', 'touchstart', 'keydown'].forEach(evt => 
                     document.removeEventListener(evt, handleInteraction)
                 );
+                
+                // Hide the tap prompt if it was shown
+                gsap.to("#tap-prompt", { autoAlpha: 0, duration: 0.5 });
                 
                 // If the timeline was paused waiting for interaction, resume it!
                 if (audioBlockedAndWaiting) {
