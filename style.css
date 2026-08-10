@@ -280,22 +280,3 @@ body {
     transform: translate(-50%, -50%);
     opacity: 0; /* Animated in via GSAP */
 }
-
-/* --- WATERMARK --- */
-#watermark {
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background-image: url('assets/images/watermark.png');
-    background-size: 150px; /* Small size for many logos */
-    background-repeat: repeat;
-    transform: rotate(-30deg); /* Professional tilt */
-    opacity: 0.15; /* Faint enough to see content, strong enough to prevent theft */
-    z-index: 9999;
-    pointer-events: none;
-    user-select: none;
-}
-
-
