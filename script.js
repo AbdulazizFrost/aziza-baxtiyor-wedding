@@ -27,7 +27,7 @@ window.addEventListener("load", () => {
         if (bg) {
             sceneTl.fromTo(bg, 
                 { scale: 1.05, filter: "blur(2px)" }, 
-                { scale: 1, filter: "blur(0px)", duration: 2.5, ease: "power1.out" }, 
+                { scale: 1, filter: "blur(0px)", duration: 3.0, ease: "power1.out" }, 
                 "<"
             );
         }
@@ -54,10 +54,10 @@ window.addEventListener("load", () => {
         
         // Custom micro-animation for Scene 3 (Heart Drawing)
         if (heart && heartPath) {
-            sceneTl.to(heart, { autoAlpha: 1, duration: 0.4 }, "-=1.0");
+            sceneTl.to(heart, { autoAlpha: 1, duration: 0.4 }, "-=1.5");
             const pathLength = heartPath.getTotalLength();
             gsap.set(heartPath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
-            sceneTl.to(heartPath, { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, "-=1.0");
+            sceneTl.to(heartPath, { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, "-=1.5");
         }
 
         // 5. Fade in footer links last
@@ -65,12 +65,12 @@ window.addEventListener("load", () => {
             sceneTl.fromTo(footer, 
                 { autoAlpha: 0 }, 
                 { autoAlpha: 1, duration: 1.0, ease: "power2.out" }, 
-                "-=1.0"
+                "-=1.5"
             );
         }
 
         // 6. Hold the scene for reading time
-        sceneTl.to({}, { duration: 1.8 }); 
+        sceneTl.to({}, { duration: 2.0 }); 
 
         // 7. Fade out the entire scene (UNLESS it is the very last scene)
         if (index < scenes.length - 1) {
