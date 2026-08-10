@@ -1,9 +1,10 @@
 window.addEventListener("load", () => {
     const bgMusic = document.getElementById("bgMusic");
 
-    // Master GSAP Timeline (starts immediately)
-    const masterTl = gsap.timeline();
+    // Master GSAP Timeline (must start paused so intro can play first)
+    const masterTl = gsap.timeline({ paused: true });
     let isAudioPlaying = false;
+    let experienceStarted = false;
 
     // Build the GSAP timeline
     const scenes = gsap.utils.toArray(".scene");
@@ -80,55 +81,45 @@ window.addEventListener("load", () => {
         masterTl.add(sceneTl);
     });
 
+    // --- INTRO SCREEN ANIMATION ---
+    const introTl = gsap.timeline();
+    introTl.from(".intro-bg-img", { scale: 1.1, filter: "blur(4px)", duration: 2, ease: "power2.out" })
+           .from(".intro-names h1, .intro-names .ampersand", { autoAlpha: 0, y: 15, stagger: 0.1, duration: 1.5, ease: "power2.out" }, "-=1.5")
+           .from(".intro-date", { autoAlpha: 0, y: 10, duration: 1.2, ease: "power2.out" }, "-=0.5")
+           .from("#open-invitation-btn", { autoAlpha: 0, scale: 0.95, duration: 1.2, ease: "power2.out" }, "-=0.5");
+
     // --- DETERMINISTIC AUDIO SYSTEM ---
-    const startExperience = () => {
-        if (isAudioPlaying) return; 
-        
-        const playPromise = bgMusic.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                // Success: Audio is playing
-                isAudioPlaying = true;
-                
-                // Remove fallback listeners immediately to prevent race conditions
-                ['click', 'touchstart', 'keydown'].forEach(evt => 
-                    document.removeEventListener(evt, handleInteraction)
-                );
-                
-                // If the timeline was paused waiting for interaction, resume it!
-                if (audioBlockedAndWaiting) {
-                    audioBlockedAndWaiting = false;
-                    masterTl.play();
+    const openBtn = document.getElementById("open-invitation-btn");
+    if (openBtn) {
+        openBtn.addEventListener("click", () => {
+            if (experienceStarted) return;
+            experienceStarted = true;
+
+            // 1. Play audio immediately inside user gesture handler (Safari requirement)
+            bgMusic.currentTime = 0;
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                    // We catch NotAllowedError (or any other) gracefully without breaking the site
+                    console.log("Audio playback error:", err);
+                });
+            }
+            isAudioPlaying = true;
+
+            // 2. Start main cinematic animation synchronously
+            masterTl.play();
+
+            // 3. Fade out intro screen elegantly
+            gsap.to("#intro-screen", {
+                autoAlpha: 0,
+                duration: 1.2,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    document.getElementById("intro-screen").style.display = "none";
                 }
-            }).catch(error => {
-                // Autoplay blocked by browser. We wait for user interaction via fallback listeners.
-                console.log("Autoplay blocked. Waiting for user interaction...");
             });
-        }
-    };
-
-    const handleInteraction = () => {
-        if (isAudioPlaying) return;
-        
-        // 1. Remove listeners immediately to avoid duplicate triggering on rapid taps
-        ['click', 'touchstart', 'keydown'].forEach(evt => 
-            document.removeEventListener(evt, handleInteraction)
-        );
-        
-        // 2. We no longer fast-forward the audio. It will strictly start from 0:00.
-        bgMusic.currentTime = 0;
-        
-        // 3. Start audio (and implicitly resume the timeline via the promise resolution)
-        startExperience();
-    };
-
-    // Setup fallback interaction listeners
-    ['click', 'touchstart', 'keydown'].forEach(evt => 
-        document.addEventListener(evt, handleInteraction, { once: true })
-    );
-
-    // Initial attempt to autoplay (will succeed silently on desktop, usually fail on mobile)
-    startExperience();
+        });
+    }
 
     // --- PAGE LIFECYCLE MANAGEMENT ---
     document.addEventListener("visibilitychange", () => {
