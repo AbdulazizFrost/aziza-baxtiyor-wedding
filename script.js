@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
         const textElements = scene.querySelectorAll(".content > *:not(.ornament):not(.footer-links)");
         const footer = scene.querySelector(".footer-links");
         const heart = scene.querySelector(".heart-icon");
-        const heartPath = scene.querySelector(".heart-icon path");
+        const heartPaths = scene.querySelectorAll(".heart-icon path");
 
         const sceneTl = gsap.timeline();
 
@@ -63,11 +63,13 @@ window.addEventListener("load", () => {
         }
         
         // Custom micro-animation for Scene 3 (Heart Drawing)
-        if (heart && heartPath) {
+        if (heart && heartPaths.length > 0) {
             sceneTl.to(heart, { autoAlpha: 1, duration: 0.5 }, "-=1.5");
-            const pathLength = heartPath.getTotalLength();
-            gsap.set(heartPath, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
-            sceneTl.to(heartPath, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut" }, "-=1.5");
+            heartPaths.forEach(hp => {
+                const pathLength = hp.getTotalLength();
+                gsap.set(hp, { strokeDasharray: pathLength, strokeDashoffset: pathLength });
+                sceneTl.to(hp, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut" }, "-=1.5");
+            });
         }
 
         // 5. Fade in footer links last
