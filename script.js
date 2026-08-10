@@ -4,7 +4,6 @@ window.addEventListener("load", () => {
     // Master GSAP Timeline (starts immediately)
     const masterTl = gsap.timeline();
     let isAudioPlaying = false;
-    let audioBlockedAndWaiting = false;
 
     // Build the GSAP timeline
     const scenes = gsap.utils.toArray(".scene");
@@ -141,10 +140,7 @@ window.addEventListener("load", () => {
             // Resume perfectly in sync when tab is active again
             if (isAudioPlaying) {
                 bgMusic.play().catch(e => console.error("Visibility resume failed:", e));
-                // Only resume timeline if we aren't deliberately waiting for a block
-                if (!audioBlockedAndWaiting) {
-                    masterTl.play();
-                }
+                masterTl.play();
             }
         }
     });
