@@ -85,7 +85,8 @@ window.addEventListener("load", () => {
     const introTl = gsap.timeline();
     introTl.from(".intro-bg-img", { scale: 1.1, filter: "blur(4px)", duration: 2, ease: "power2.out" })
            .from(".intro-names h1, .intro-names .ampersand", { autoAlpha: 0, y: 15, stagger: 0.1, duration: 1.5, ease: "power2.out" }, "-=1.5")
-           .from(".intro-date, #open-invitation-btn", { autoAlpha: 0, y: 10, stagger: 0.2, duration: 1.2, ease: "power2.out" }, "-=1.0");
+           .from(".intro-date", { autoAlpha: 0, y: 10, duration: 1.2, ease: "power2.out" }, "-=1.0")
+           .from("#open-invitation-btn", { autoAlpha: 0, scale: 0.95, duration: 1.2, ease: "power2.out" }, "-=1.0");
 
     // --- DETERMINISTIC AUDIO SYSTEM ---
     const openBtn = document.getElementById("open-invitation-btn");
