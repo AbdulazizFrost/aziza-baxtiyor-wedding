@@ -284,7 +284,7 @@ body {
 /* --- TAP PROMPT --- */
 #tap-prompt {
     position: fixed;
-    bottom: 12%;
+    bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 1000;
