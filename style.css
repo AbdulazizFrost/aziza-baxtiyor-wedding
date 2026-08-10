@@ -396,6 +396,8 @@ body {
 
 #open-invitation-btn {
     display: inline-block;
+    position: relative;
+    z-index: 9999;
     background-color: rgba(74, 66, 56, 0.08); /* Soft dark background to ensure visibility */
     border: 1px solid rgba(74, 66, 56, 0.6);
     color: var(--text-color);
